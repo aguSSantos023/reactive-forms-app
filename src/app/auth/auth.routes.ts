@@ -3,7 +3,7 @@ import { RegisterP } from "./pages/register-p/register-p";
 
 
 
-export const authRoutes: Routes = [
+const authRoutes: Routes = [
   {
     path: '',
     children: [
@@ -18,3 +18,6 @@ export const authRoutes: Routes = [
     ]
   }
 ]
+
+
+export default authRoutes;

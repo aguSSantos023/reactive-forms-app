@@ -1,8 +1,9 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-p',
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './dynamic-p.html',
   styleUrl: './dynamic-p.css'
 })
