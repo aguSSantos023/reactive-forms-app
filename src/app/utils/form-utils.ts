@@ -1,10 +1,24 @@
 import { FormGroup, FormArray, ValidationErrors, AbstractControl } from '@angular/forms';
 
 
+
+
+async function sleep(){
+  return new Promise ( resolve => {
+    setTimeout(() => {
+      resolve(true)
+    }, 2500);
+  })
+
+}
+
 export class FormUtils {
   static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
   static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
+
+
+
 
   static getTextError(errors: ValidationErrors): string | null{
     for( const key of Object.keys(errors) ){
@@ -20,6 +34,12 @@ export class FormUtils {
 
         case 'email':
           return 'El valor ingresado no es un correo electrónico valido.'
+
+        case 'emailTaken':
+          return 'El correo electronico ya esta siendo usado por otro usuario'
+
+        case 'isStrider':
+          return 'No es valido como Username el valor Strider'
 
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
@@ -85,6 +105,42 @@ export class FormUtils {
 
       return field1Value === field2Value ? null : { passwordsNotEqual: true}
     }
+  }
+
+
+  static async checkingServerResponse(control: AbstractControl): Promise<ValidationErrors | null> {
+    console.log('enviando al servidor');
+
+    await sleep()
+
+    const formValue = control.value
+
+    if (formValue === 'hola@mundo.com') {
+      return{
+        emailTaken: true
+      }
+    }else{
+      return null;
+
+    }
+
+
+  }
+
+
+  static notStrider(control: AbstractControl): ValidationErrors | null {
+
+    const formValue:string = control.value
+
+    if (formValue.toLowerCase() === 'strider') {
+      return{
+        isStrider: true
+      }
+    }else {
+      return null;
+
+    }
+
   }
 }
 
