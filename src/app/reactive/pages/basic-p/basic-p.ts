@@ -1,6 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormUtils } from '../../../utils/form-utils';
 
 @Component({
   selector: 'app-basic-p',
@@ -11,6 +12,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class BasicP {
 
   fb = inject(FormBuilder)
+  formUtils = FormUtils
+
 
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -25,12 +28,12 @@ export class BasicP {
   //   inStorage: new FormControl(0),
   // })
 
-  isValidField( fieldName: string ): boolean | null {
-    return (
-      this.myForm.controls[fieldName].errors &&
-      this.myForm.controls[fieldName].touched
-    )
-  }
+  // isValidField( fieldName: string ): boolean | null {
+  //   return (
+  //     this.myForm.controls[fieldName].errors &&
+  //     this.myForm.controls[fieldName].touched
+  //   )
+  // }
 
 
   getFieldError( fieldName: string ): string | null {
