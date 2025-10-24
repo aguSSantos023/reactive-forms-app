@@ -44,13 +44,11 @@ export class DynamicP {
   }
 
   onDeleteToFavorites(index: number){
-    console.log(index);
 
     this.favoriteGames.removeAt(index)
   }
 
   onSubmit(){
-    console.log(this.myForm.value);
 
     this.myForm.markAllAsTouched()
   }
